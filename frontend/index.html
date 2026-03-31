@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+<h1>Simple test for backend</h1>
+<button id="button_main">Click me</button>
+<p id="output"></p>
+
+
+<script>
+    //since this is just a plain html file, just use the direct endpoint for now
+    endpoint = "http://127.0.0.1:8000/war_state"
+    document.getElementById('button_main').addEventListener('click', async () => {
+        console.log("clicked");
+        let data = await fetch(endpoint);
+        //just assume data loaded for now, i dont have all day to make this production grade
+        document.getElementById("output").innerText = JSON.stringify(await data.json())
+    })
+</script>
+</body>
+</html>
