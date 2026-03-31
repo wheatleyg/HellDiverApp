@@ -7,7 +7,7 @@
 <body>
 <h1>Simple test for backend</h1>
 <button id="button_main">Click me</button>
-<p id="output"></p>
+<div id="output"></div>
 
 
 <script>
@@ -17,7 +17,11 @@
         console.log("clicked");
         let data = await fetch(endpoint);
         //just assume data loaded for now, i dont have all day to make this production grade
-        document.getElementById("output").innerText = JSON.stringify(await data.json())
+        let json = await data.json();
+
+        let totalDeaths = document.createElement("p")
+        totalDeaths.innerText = "total deaths: " + json.war_state.statistics.deaths
+        document.getElementById('output').appendChild(totalDeaths);
     })
 </script>
 </body>
