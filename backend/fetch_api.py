@@ -27,4 +27,4 @@ s.headers.update({"X-Super-Client" : client, "X-Super-Contact" : contact})
 # just a quick demo
 async def get_war_state():
     response = s.get(f"{endpoint}/v1/war")
-    return response, response.json()
+    return response.json()
