@@ -18,7 +18,7 @@
         let data = await fetch(endpoint);
         //just assume data loaded for now, i dont have all day to make this production grade
         let json = await data.json();
-
+        console.log(JSON.stringify(json.war_state));
         let totalDeaths = document.createElement("p")
         totalDeaths.innerText = "total deaths: " + json.war_state.statistics.deaths
         document.getElementById('output').appendChild(totalDeaths);

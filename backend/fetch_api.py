@@ -1,4 +1,6 @@
+import logging
 import time
+from logging import log
 from os import error
 
 import requests
@@ -21,7 +23,10 @@ if client is None or contact is None:
 
 s = requests.Session()
 s.headers.update({"X-Super-Client" : client, "X-Super-Contact" : contact})
-
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
 
 
 # just a quick demo
@@ -34,19 +39,23 @@ async def get_war_state():
 
     try:
         response = s.get(f"{endpoint}/v1/war")
+        print(f"the response: {response}")
         response.raise_for_status()
 
         data = response.json()
+
 
         _cache = data
         lastCallTime = current_time
         return data
     except requests.exceptions.RequestException as e:
+        print(f"error: {e}")
+
         #it is screwing up somewhere
-        if _cache is not None:
+        if _cache:
             return _cache.copy()
 
-        return None
+        return {"error": "turn on a proxy"}
 
 
 

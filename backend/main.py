@@ -19,4 +19,6 @@ async def say_hello(name: str):
 @app.get("/war_state")
 async def get_war_sate():
     x = await fetch_api.get_war_state()
+    print(x)
     return {"war_state": x}
+    
